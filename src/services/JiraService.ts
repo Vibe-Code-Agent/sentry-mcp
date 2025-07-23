@@ -63,7 +63,7 @@ export class JiraService {
       });
 
       this.client = axios.create({
-        baseURL: `${this.baseUrl}/rest/api/3`,
+        baseURL: this.baseUrl,
         headers: {
           'Authorization': `Basic ${Buffer.from(`${jiraEmail}:${jiraApiToken}`).toString('base64')}`,
           'Content-Type': 'application/json',
@@ -89,7 +89,8 @@ export class JiraService {
     }
 
     try {
-      const response = await this.client!.get('/board?type=scrum,kanban');
+      // Use the correct agile API endpoint for boards
+      const response = await this.client!.get('/rest/agile/1.0/board');
       return response.data.values || [];
     } catch (error) {
       throw new Error(`Failed to fetch Jira boards: ${error}`);
@@ -102,7 +103,7 @@ export class JiraService {
     }
 
     try {
-      const response = await this.client!.get(`/board/${boardId}`);
+      const response = await this.client!.get(`/rest/agile/1.0/board/${boardId}`);
       return response.data;
     } catch (error) {
       throw new Error(`Failed to fetch board ${boardId}: ${error}`);
@@ -115,7 +116,7 @@ export class JiraService {
     }
 
     try {
-      const response = await this.client!.get(`/project/${projectKey}/statuses`);
+      const response = await this.client!.get(`/rest/api/3/project/${projectKey}/statuses`);
       const issueTypes = new Set<string>();
       const result: JiraIssueType[] = [];
 
@@ -189,7 +190,7 @@ export class JiraService {
         delete issueData.fields.priority;
       }
 
-      const response = await this.client!.post('/issue', issueData);
+      const response = await this.client!.post('/rest/api/3/issue', issueData);
       
       return {
         id: response.data.id,
