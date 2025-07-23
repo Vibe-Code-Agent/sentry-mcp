@@ -291,4 +291,81 @@ export class SentryService {
 
     return Array.from(files);
   }
+
+  async linkExternalIssue(issueId: string, externalIssue: {
+    issueId: string;
+    url: string;
+    displayName: string;
+  }): Promise<void> {
+    if (!this.isConfigured()) {
+      throw new Error('Sentry service not configured. Please ensure SENTRY_AUTH_TOKEN and SENTRY_ORGANIZATION environment variables are set.');
+    }
+
+    try {
+      // Resolve short ID if needed
+      const resolvedIssueId = this.isShortId(issueId) ? await this.resolveShortId(issueId) : issueId;
+      
+      const payload = {
+        externalIssue: externalIssue.issueId,
+        url: externalIssue.url,
+        displayName: externalIssue.displayName,
+      };
+
+      await this.client!.put(`/issues/${resolvedIssueId}/external-issues/`, payload);
+    } catch (error) {
+      // Try alternative API endpoint for external issues
+      try {
+        const resolvedIssueId = this.isShortId(issueId) ? await this.resolveShortId(issueId) : issueId;
+        
+        const payload = {
+          externalIssue: externalIssue.issueId,
+          url: externalIssue.url,
+          displayName: externalIssue.displayName,
+        };
+
+        await this.client!.post(`/issues/${resolvedIssueId}/external-issues/`, payload);
+      } catch (secondError) {
+        console.error(`Failed to link external issue using both PUT and POST methods: ${error}, ${secondError}`);
+        throw new Error(`Failed to link external issue to Sentry: ${error}`);
+      }
+    }
+  }
+
+  async addIssueNote(issueId: string, note: string): Promise<void> {
+    if (!this.isConfigured()) {
+      throw new Error('Sentry service not configured. Please ensure SENTRY_AUTH_TOKEN and SENTRY_ORGANIZATION environment variables are set.');
+    }
+
+    try {
+      // Resolve short ID if needed
+      const resolvedIssueId = this.isShortId(issueId) ? await this.resolveShortId(issueId) : issueId;
+      
+      const payload = {
+        text: note,
+      };
+
+      await this.client!.post(`/issues/${resolvedIssueId}/notes/`, payload);
+    } catch (error) {
+      throw new Error(`Failed to add note to Sentry issue: ${error}`);
+    }
+  }
+
+  async updateIssueStatus(issueId: string, status: 'resolved' | 'unresolved' | 'ignored'): Promise<void> {
+    if (!this.isConfigured()) {
+      throw new Error('Sentry service not configured. Please ensure SENTRY_AUTH_TOKEN and SENTRY_ORGANIZATION environment variables are set.');
+    }
+
+    try {
+      // Resolve short ID if needed
+      const resolvedIssueId = this.isShortId(issueId) ? await this.resolveShortId(issueId) : issueId;
+      
+      const payload = {
+        status: status,
+      };
+
+      await this.client!.put(`/issues/${resolvedIssueId}/`, payload);
+    } catch (error) {
+      throw new Error(`Failed to update Sentry issue status: ${error}`);
+    }
+  }
 } 
