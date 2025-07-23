@@ -1,5 +1,5 @@
 {
-  "name": "sentry-investigator-mcp",
+  "name": "sentry-mcp",
   "version": "1.0.0",
   "description": "MCP server that reads Sentry issues, investigates codebase, and provides explanations and fixes",
   "main": "dist/index.js",

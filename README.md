@@ -61,7 +61,7 @@ Add the MCP server to your Cursor configuration. Edit your MCP settings file:
   "mcpServers": {
     "sentry-investigator": {
       "command": "node",
-      "args": ["/path/to/sentry-investigator-mcp/dist/index.js"],
+      "args": ["/path/to/sentry-mcp/dist/index.js"],
       "env": {
         "SENTRY_AUTH_TOKEN": "your-sentry-auth-token-here",
         "SENTRY_ORGANIZATION": "your-sentry-org-slug",
@@ -77,7 +77,7 @@ Add the MCP server to your Cursor configuration. Edit your MCP settings file:
 - `SENTRY_ORGANIZATION`: Your Sentry organization slug
 - `SENTRY_PROJECT`: (Optional) Your default project slug
 
-Replace `/path/to/sentry-investigator-mcp` with the actual path to this project.
+Replace `/path/to/sentry-mcp` with the actual path to this project.
 
 ### 3. Restart Cursor
 

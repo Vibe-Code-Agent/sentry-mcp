@@ -21,7 +21,7 @@ export class SentryInvestigatorServer {
   constructor() {
     this.server = new Server(
       {
-        name: 'sentry-investigator-mcp',
+        name: 'sentry-mcp',
         version: '1.0.0',
       },
       {
