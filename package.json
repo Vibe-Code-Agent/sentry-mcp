@@ -18,7 +18,7 @@
     "@sentry/node": "^7.100.0",
     "axios": "^1.6.0",
     "glob": "^11.0.3",
-    "ignore": "^5.3.0",
+    "ignore": "^7.0.5",
     "typescript": "^5.3.0"
   },
   "devDependencies": {
