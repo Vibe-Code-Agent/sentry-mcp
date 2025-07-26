@@ -36,11 +36,6 @@ updates:
     allow:
       - dependency-type: "direct"
       - dependency-type: "indirect"
-    # Auto-merge configuration for patch updates
-    assignees:
-      - "@doraemon0905"
-    reviewers:
-      - "@doraemon0905"
     # Add commit message prefix
     commit-message:
       prefix: "deps"
