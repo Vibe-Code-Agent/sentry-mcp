@@ -46,7 +46,4 @@ updates:
     # Labels to add to PRs
     labels:
       - "dependencies"
-      - "automated" 
-    auto-merge:
-      enable: true
-      method: "squash"
+      - "automated"
