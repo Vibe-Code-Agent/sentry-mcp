@@ -19,7 +19,7 @@
     "axios": "^1.12.2",
     "glob": "^11.0.3",
     "ignore": "^7.0.5",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@types/node": "^24.5.2",
