@@ -14,7 +14,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.18.2",
+    "@modelcontextprotocol/sdk": "^1.19.1",
     "@sentry/node": "^10.17.0",
     "axios": "^1.12.2",
     "glob": "^11.0.3",
