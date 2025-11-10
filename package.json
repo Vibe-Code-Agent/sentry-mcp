@@ -15,7 +15,7 @@
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.21.1",
-    "@sentry/node": "^10.22.0",
+    "@sentry/node": "^10.24.0",
     "axios": "^1.13.2",
     "glob": "^11.0.3",
     "ignore": "^7.0.5",
